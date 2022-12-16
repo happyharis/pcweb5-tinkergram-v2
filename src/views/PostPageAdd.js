@@ -1,8 +1,7 @@
+import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
-import "./App.css";
-
-function App() {
+export default function PostPageAdd() {
   return (
     <Navbar variant="light" bg="light">
       <Container>
@@ -14,5 +13,3 @@ function App() {
     </Navbar>
   );
 }
-
-export default App;
