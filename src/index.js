@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PostPageAdd from "./views/PostPageAdd";
+import PostPageDetails from "./views/PostPageDetails";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/add",
     element: <PostPageAdd />,
+  },
+  {
+    path: "/post/:id",
+    element: <PostPageDetails />,
   },
 ]);
 
