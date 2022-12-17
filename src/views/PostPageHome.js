@@ -1,18 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { Container, Image, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Image, Nav, Navbar, Row, Spinner } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function PostPageHome() {
   const [user, loading, error] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
-  async function getAllPosts() {}
-
-  async function checkUserLoggedIn() {}
+  async function getAllPosts() {
+    const query = await getDocs(collection(db, "posts"));
+    const posts = query.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+    setPosts(posts);
+  }
 
   useEffect(() => {
     if (!user) return navigate("/login");
@@ -34,9 +39,8 @@ export default function PostPageHome() {
         </Container>
       </Navbar>
       <Container>
-        <Row>
-          <ImagesRow />
-        </Row>
+        <Row>{loading ? <Spinner animation="grow" /> : <ImagesRow />}</Row>
+        <p>{error}</p>
       </Container>
     </>
   );
