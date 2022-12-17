@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PostPageAdd from "./views/PostPageAdd";
 import PostPageDetails from "./views/PostPageDetails";
+import PostPageUpdate from "./views/PostPageUpdate";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/post/:id",
     element: <PostPageDetails />,
+  },
+  {
+    path: "/update/:id",
+    element: <PostPageUpdate />,
   },
 ]);
 

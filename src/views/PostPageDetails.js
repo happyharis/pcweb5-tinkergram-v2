@@ -41,7 +41,7 @@ export default function PostPageDetails() {
             <Card>
               <Card.Body>
                 <Card.Text>{caption}</Card.Text>
-                <Card.Link>Edit</Card.Link>
+                <Card.Link href={`/update/${id}`}>Edit</Card.Link>
                 <Card.Link>Delete</Card.Link>
               </Card.Body>
             </Card>
