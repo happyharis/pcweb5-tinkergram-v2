@@ -1,12 +1,11 @@
 import { doc, setDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 export default function PostPageAdd() {
-  const [user, loading, error] = useAuthState(auth);
+  const user = auth.currentUser;
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ export default function PostPageAdd() {
   }
 
   useEffect(() => {
-    if (!user) return navigate("/login");
+    if (!user) navigate("/login");
   }, [navigate, user]);
 
   return (

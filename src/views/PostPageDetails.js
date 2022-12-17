@@ -1,7 +1,6 @@
 import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
 
@@ -10,7 +9,7 @@ export default function PostPageDetails() {
   const [image, setImage] = useState("");
   const params = useParams();
   const id = params.id;
-  const [user, loading, error] = useAuthState(auth);
+  const user = auth.currentUser;
   const navigate = useNavigate();
 
   async function deletePost(id) {
@@ -26,7 +25,7 @@ export default function PostPageDetails() {
   }
 
   useEffect(() => {
-    if (!user) return navigate("/login");
+    if (!user) navigate("/login");
     getPost(id);
   }, [id, navigate, user]);
 
