@@ -1,11 +1,27 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { API, POST } from "../constants";
 
 export default function PostPageDetails() {
-  const { image, caption } = {
-    image: "https://zca.sg/img/1",
-    caption: "Soccer player",
-  };
+  const [caption, setCaption] = useState("");
+  const [image, setImage] = useState("");
+  const params = useParams();
+  const id = params.id;
+
+  async function getPost(id) {
+    const url = API + POST + `/${id}`;
+    const response = await axios.get(url);
+    const { caption, image } = response.data;
+    setCaption(caption);
+    setImage(image);
+  }
+
+  useEffect(() => {
+    getPost(id);
+  }, [id]);
+
   return (
     <>
       <Navbar variant="light" bg="light">
