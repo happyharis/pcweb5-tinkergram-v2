@@ -1,18 +1,19 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 export default function PostPageUpdate() {
-  const user = auth.currentUser;
+  const [user, loading] = useAuthState(auth);
   const params = useParams();
   const id = params.id;
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const navigate = useNavigate();
 
-  async function updatePost(id) {
+  async function updatePost() {
     await updateDoc(doc(db, "posts", id), { caption, image });
     navigate("/");
   }
@@ -25,9 +26,10 @@ export default function PostPageUpdate() {
   }
 
   useEffect(() => {
+    if (loading) return;
     if (!user) navigate("/login");
     getPost(id);
-  }, [id, navigate, user]);
+  }, [id, loading, navigate, user]);
 
   return (
     <>
