@@ -1,61 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
-import { Container, Image, Nav, Navbar, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
-function App() {
-  const [posts, setPosts] = useState([]);
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import LoginPage from "./views/LoginPage";
+import PostPageHome from "./views/PostPageHome";
+import SignUpPage from "./views/SignUpPage";
 
-  async function getAllPosts() {}
-
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-
-  const ImagesRow = () => {
-    return posts.map((post, index) => <ImageSquare key={index} post={post} />);
-  };
-
+export default function App() {
   return (
     <>
-      <Navbar variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/add">New Post</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <Container>
-        <Row>
-          <ImagesRow />
-        </Row>
-      </Container>
+      <Routes>
+        <Route path="/" element={<PostPageHome />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
     </>
   );
 }
-
-function ImageSquare({ post }) {
-  const { image, id } = post;
-  return (
-    <Link
-      to={`post/${id}`}
-      style={{
-        width: "18rem",
-        marginLeft: "1rem",
-        marginTop: "2rem",
-      }}
-    >
-      <Image
-        src={image}
-        style={{
-          objectFit: "cover",
-          width: "18rem",
-          height: "18rem",
-        }}
-      />
-    </Link>
-  );
-}
-
-export default App;
