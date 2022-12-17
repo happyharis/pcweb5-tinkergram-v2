@@ -1,16 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Container, Image, Nav, Navbar, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 
 export default function PostPageHome() {
+  const [user, loading, error] = useAuthState(auth);
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   async function getAllPosts() {}
 
+  async function checkUserLoggedIn() {}
+
   useEffect(() => {
+    if (!user) return navigate("/login");
     getAllPosts();
-  }, []);
+  }, [navigate, user]);
 
   const ImagesRow = () => {
     return posts.map((post, index) => <ImageSquare key={index} post={post} />);

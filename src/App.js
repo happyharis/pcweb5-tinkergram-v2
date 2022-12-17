@@ -4,6 +4,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./views/LoginPage";
 import PostPageHome from "./views/PostPageHome";
+import PostPageDetails from "./views/PostPageDetails";
 import SignUpPage from "./views/SignUpPage";
 
 export default function App() {
@@ -11,8 +12,9 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<PostPageHome />} />
-        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/post/:id" element={<PostPageDetails />} />
       </Routes>
     </>
   );
