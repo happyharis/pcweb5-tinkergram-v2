@@ -1,30 +1,16 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Image, Nav, Navbar, Row } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
-import { API, DELETE, POST } from "../constants";
+import { useParams } from "react-router-dom";
 
 export default function PostPageDetails() {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const params = useParams();
   const id = params.id;
-  const navigate = useNavigate();
 
-  async function deletePost(id) {
-    const url = API + DELETE + `/${id}`;
-    console.log(url);
-    await axios.delete(url);
-    navigate("/");
-  }
+  async function deletePost(id) {}
 
-  async function getPost(id) {
-    const url = API + POST + `/${id}`;
-    const response = await axios.get(url);
-    const { caption, image } = response.data;
-    setCaption(caption);
-    setImage(image);
-  }
+  async function getPost(id) {}
 
   useEffect(() => {
     getPost(id);

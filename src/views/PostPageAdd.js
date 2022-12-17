@@ -1,13 +1,11 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { ADD, API } from "../constants";
 
 export default function PostPageAdd() {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
-  const navigate = useNavigate();
+
+  async function addPost() {}
 
   return (
     <>
@@ -44,18 +42,7 @@ export default function PostPageAdd() {
               Make sure the url has a image type at the end: jpg, jpeg, png.
             </Form.Text>
           </Form.Group>
-          <Button
-            variant="primary"
-            onClick={async (e) => {
-              const post = { image, caption };
-              try {
-                await axios.post(API + ADD, post);
-                navigate("/");
-              } catch (error) {
-                console.error(error.message);
-              }
-            }}
-          >
+          <Button variant="primary" onClick={async (e) => addPost()}>
             Submit
           </Button>
         </Form>

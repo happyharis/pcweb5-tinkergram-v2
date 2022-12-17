@@ -1,37 +1,19 @@
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Container, Image, Nav, Navbar, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { API, POSTS } from "./constants";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
-  async function getAllPosts() {
-    try {
-      const response = await axios.get(API + POSTS);
-      const posts = response.data;
-      console.log(posts);
-      setPosts(posts);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  async function getAllPosts() {}
 
   useEffect(() => {
     getAllPosts();
   }, []);
 
   const ImagesRow = () => {
-    // posts = [{id: 3, caption: 'Ronaldo', image: 'https://zca.sg/img/1'}];
     return posts.map((post, index) => <ImageSquare key={index} post={post} />);
-    // return [<ImageSquare key={index} post={post}]
-
-    // return [<ImageSquare
-    //          key={0}
-    //          post={{id: 3, caption: 'Ronaldo', image: 'https://zca.sg/img/1'}}
-    //        />]
   };
 
   return (

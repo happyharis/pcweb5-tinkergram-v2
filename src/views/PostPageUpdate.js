@@ -1,23 +1,16 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
-import { ADD, API, POST } from "../constants";
+import { useParams } from "react-router-dom";
 
 export default function PostPageUpdate() {
   const params = useParams();
   const id = params.id;
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
-  const navigate = useNavigate();
 
-  async function getPost(id) {
-    const url = API + POST + `/${id}`;
-    const response = await axios.get(url);
-    const { caption, image } = response.data;
-    setCaption(caption);
-    setImage(image);
-  }
+  async function getPost(id) {}
+
+  async function updatePost(id) {}
 
   useEffect(() => {
     getPost(id);
@@ -58,18 +51,7 @@ export default function PostPageUpdate() {
               Make sure the url has a image type at the end: jpg, jpeg, png.
             </Form.Text>
           </Form.Group>
-          <Button
-            variant="primary"
-            onClick={async (e) => {
-              const post = { image, caption };
-              try {
-                await axios.put(API + POST + "/" + id, post);
-                navigate("/");
-              } catch (error) {
-                console.error(error.message);
-              }
-            }}
-          >
+          <Button variant="primary" onClick={(e) => updatePost()}>
             Submit
           </Button>
         </Form>
